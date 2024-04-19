@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12...3.20)
+cmake_minimum_required(VERSION 3.21)
 
 project(enet)
 
@@ -93,10 +93,12 @@ if (MINGW)
     target_link_libraries(enet winmm ws2_32)
 endif()
 
-install(TARGETS enet
-    RUNTIME DESTINATION bin
-    ARCHIVE DESTINATION lib/static
-    LIBRARY DESTINATION lib)
+if (PROJECT_IS_TOP_LEVEL)
+	install(TARGETS enet
+		RUNTIME DESTINATION bin
+		ARCHIVE DESTINATION lib/static
+		LIBRARY DESTINATION lib)
 
-install(DIRECTORY include/
-        DESTINATION include)
+	install(DIRECTORY include/
+			DESTINATION include)
+endif()
